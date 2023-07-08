@@ -19,7 +19,7 @@
     "nanoid": "3.3.4"
   },
   "engines": {
-    "node": ">=NODE_JS_VERSION"
+    "node": ">=14.20.1"
   },
   "devDependencies": {
     "eslint": "7.19.0",
