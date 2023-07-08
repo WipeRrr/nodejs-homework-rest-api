@@ -42,6 +42,9 @@ const deleteById = async (req, res) => {
 };
 
 const updateStatusContact = async (req, res) => {
+   if (!req.body) {
+     throw HttpError(400, "Missing field favorite");
+   }
   const { contactId } = req.params;
   const result = await Contact.findByIdAndUpdate(contactId, req.body, {
     new: true,
