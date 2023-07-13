@@ -60,7 +60,6 @@ const subscriptionSchema = Joi.object({
   subscription: Joi.string().valid(...SUBSCRIPTION_TYPES),
 });
 
-
 const schemas = {
   registerSchema,
   loginSchema,

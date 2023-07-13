@@ -53,30 +53,27 @@ const getCurrent = async (req, res) => {
 
 const logout = async (req, res) => {
   const { _id } = req.user;
-  await User.findByIdAndUpdate(_id, { token: null })
+  await User.findByIdAndUpdate(_id, { token: null });
   res.json({
-    message:"Logout success"
-  })
-}
+    message: "Logout success",
+  });
+};
 
+const updateSubscription = async (req, res) => {
+  const { _id } = req.user;
+  const { subscription } = req.body;
 
-  const updateSubscription = async (req, res) => {
-    const { _id } = req.user;
-    const { subscription } = req.body;
+  await User.findByIdAndUpdate(_id, { subscription }, { new: true });
 
-    const result = await User.findByIdAndUpdate(
-      _id,
-      { subscription },
-      { new: true,},
-    );
-
-    return res.status(200).json(result);
-  };
+  return res.status(200).json({
+    message: `Subscription updated to ${subscription}`,
+  });
+};
 
 module.exports = {
   register: ctrlWrapper(register),
   login: ctrlWrapper(login),
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
-  updateSubscription:ctrlWrapper(updateSubscription),
+  updateSubscription: ctrlWrapper(updateSubscription),
 };
