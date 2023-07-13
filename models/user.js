@@ -44,7 +44,13 @@ const registerSchema = Joi.object({
 });
 
 const loginSchema = Joi.object({
-  email: Joi.string().pattern(emailRegexp).required(),
+  email: Joi.string()
+    .pattern(emailRegexp)
+    .messages({
+      "string.pattern.base":
+        "Invalid email. Please provide a valid email address",
+    })
+    .required(),
   password: Joi.string().min(6).required(),
 });
 
