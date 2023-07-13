@@ -4,6 +4,8 @@ const Joi = require("joi");
 
 const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
+const SUBSCRIPTION_TYPES = ["starter", "pro", "business"];
+
 const userSchema = new Schema(
   {
     email: {
@@ -54,9 +56,15 @@ const loginSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
+const subscriptionSchema = Joi.object({
+  subscription: Joi.string().valid(...SUBSCRIPTION_TYPES),
+});
+
+
 const schemas = {
   registerSchema,
   loginSchema,
+  subscriptionSchema,
 };
 
 const User = model("user", userSchema);
